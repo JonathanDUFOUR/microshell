@@ -6,7 +6,7 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/08 07:03:11 by jodufour          #+#    #+#              #
-#    Updated: 2022/02/08 08:48:14 by jodufour         ###   ########.fr        #
+#    Updated: 2022/02/08 14:22:53 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,11 +34,11 @@ PRV_DIR	=	private/
 #            SOURCE FILES            #
 ######################################
 SRC		=	\
-			${addprefix utils/,		\
-				msh_strlen.c		\
-			}						\
+			cd.c					\
+			exec.c					\
 			main.c					\
-			pipeline.c
+			pipeline.c				\
+			redirect.c
 
 ######################################
 #            OBJECT FILES            #
