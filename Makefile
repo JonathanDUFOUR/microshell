@@ -6,14 +6,14 @@
 #    By: jodufour <jodufour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/08 07:03:11 by jodufour          #+#    #+#              #
-#    Updated: 2022/02/08 14:22:53 by jodufour         ###   ########.fr        #
+#    Updated: 2022/05/20 00:58:16 by jodufour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ######################################
 #              COMMANDS              #
 ######################################
-CC		=	clang -c
+CC		=	clang
 LINK	=	clang
 MKDIR	=	mkdir -p
 RM		=	rm -rf
@@ -51,7 +51,8 @@ DEP		=	${OBJ:.o=.d}
 #######################################
 #                FLAGS                #
 #######################################
-CFLAGS	=	-Wall -Wextra #-Werror
+CFLAGS	=	-c
+CFLAGS	+=	-Wall -Wextra -Werror
 CFLAGS	+=	-MMD -MP
 CFLAGS	+=	-I${PRV_DIR}
 
@@ -64,8 +65,10 @@ endif
 #######################################
 #                RULES                #
 #######################################
+.PHONY: all clean fclean re fre
+
 ${NAME}: ${OBJ}
-	${LINK} ${OBJ} ${LDFLAGS} ${OUTPUT_OPTION}
+	${LINK} $^ ${LDFLAGS} ${OUTPUT_OPTION}
 
 all: ${NAME}
 
@@ -73,7 +76,7 @@ all: ${NAME}
 
 ${OBJ_DIR}%.o: ${SRC_DIR}%.c
 	@${MKDIR} ${@D}
-	${CC} ${CFLAGS} $< ${OUTPUT_OPTION}
+	${CC} $< ${CFLAGS} ${OUTPUT_OPTION}
 
 clean:
 	${RM} ${OBJ_DIR} ${NAME} vgcore.*
@@ -85,7 +88,5 @@ re: clean all
 
 fre: fclean all
 
--include /home/jodufour/Templates/mk_files/coffee.mk
--include /home/jodufour/Templates/mk_files/norm.mk
-
-.PHONY: all clean fclean re fre
+-include ${HOME}/Templates/mk_files/coffee.mk
+-include ${HOME}/Templates/mk_files/norm.mk
